@@ -5,7 +5,21 @@ from places.models import Place, PlaceImage
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    fields = ['title', 'description_short', 'description_long', 'lng', 'lat', 'imgs']
+
+    fieldsets = [
+        (
+            'Place',
+            {
+                'fields': ['title', 'description_short', 'description_long'],
+            },
+        ),
+        (
+            'Coordinates',
+            {
+                'fields': ['lng', 'lat']
+            }
+        )
+    ]
 
 
 @admin.register(PlaceImage)
