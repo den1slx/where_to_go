@@ -25,7 +25,8 @@ class PlaceAdmin(admin.ModelAdmin):
 @admin.register(PlaceImage)
 class PlaceImageAdmin(admin.ModelAdmin):
     fields = ['place', 'image']
-    search_fields = ['place__id',]
+    search_fields = ['id',]
+    list_filter = ['place__id',]
 
 
 
