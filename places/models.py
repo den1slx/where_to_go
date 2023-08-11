@@ -15,7 +15,7 @@ class Place(models.Model):
 
 
 class PlaceImage(models.Model):
-    image = models.ImageField(upload_to='static/images/')
+    image = models.ImageField(upload_to='images/')
     place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL, related_name='images')
 
     def __str__(self):
