@@ -9,7 +9,14 @@ class Place(models.Model):
     description_long = models.TextField('Описание', null=True)
     lng = models.FloatField('longitude', null=True)
     lat = models.FloatField('latitude', null=True)
-    imgs = models.TextField(null=True)
 
     def __str__(self):
         return self.title
+
+
+class PlaceImage(models.Model):
+    image = models.ImageField(upload_to='static/images/')
+    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL, related_name='images')
+
+    def __str__(self):
+        return f'{self.place.id} - {self.place.title}: {self.id}'
