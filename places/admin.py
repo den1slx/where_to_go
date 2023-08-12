@@ -3,9 +3,16 @@ from django.contrib import admin
 from places.models import Place, PlaceImage
 
 
+class InlineImage(admin.TabularInline):
+    model = PlaceImage
+    extra = 1
+
+
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     readonly_fields = ['path',]
+    inlines = [InlineImage, ]
+
     fieldsets = [
         (
             'Place',
@@ -24,7 +31,7 @@ class PlaceAdmin(admin.ModelAdmin):
             {
                 'fields': ['path',]
             }
-        )
+        ),
     ]
 
 
