@@ -9,6 +9,7 @@ class Place(models.Model):
     description_long = models.TextField('Описание', null=True)
     lng = models.FloatField('longitude', null=True)
     lat = models.FloatField('latitude', null=True)
+    path = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.title
