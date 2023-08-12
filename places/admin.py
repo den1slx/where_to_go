@@ -5,7 +5,7 @@ from places.models import Place, PlaceImage
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-
+    readonly_fields = ['path',]
     fieldsets = [
         (
             'Place',
@@ -17,6 +17,12 @@ class PlaceAdmin(admin.ModelAdmin):
             'Coordinates',
             {
                 'fields': ['lng', 'lat']
+            }
+        ),
+        (
+            'Path to json',
+            {
+                'fields': ['path',]
             }
         )
     ]
