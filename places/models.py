@@ -18,6 +18,21 @@ class Place(models.Model):
 class PlaceImage(models.Model):
     image = models.ImageField(upload_to='images/')
     place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL, related_name='images')
+    my_order = models.PositiveIntegerField(
+        default=0,
+        blank=False,
+        null=False,
+        db_index=True,
+        editable=True,
+        unique=False,
+    )
 
     def __str__(self):
-        return f'{self.place.id} - {self.place.title}: {self.id}'
+        return f'{self.place.title} image{self.place.id}{self.id}'
+
+    class Meta:
+        ordering = ['my_order',]
+        verbose_name_plural = "Images"
+
+
+
