@@ -71,12 +71,6 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
                 'fields': ['lng', 'lat']
             }
         ),
-        (
-            'TMC',
-            {
-                'fields': ['tmc',]
-            }
-        )
     ]
 
 
