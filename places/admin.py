@@ -57,10 +57,7 @@ class InlineImage(SortableStackedInline):
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
-    readonly_fields = ['path',]
-
     inlines = [InlineImage, ]
-
     fieldsets = [
         (
             'Place',
@@ -75,11 +72,11 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
             }
         ),
         (
-            'Path to json',
+            'TMC',
             {
-                'fields': ['path',]
+                'fields': ['tmc',]
             }
-        ),
+        )
     ]
 
 
