@@ -69,8 +69,7 @@ def get_place_info(place):
         "title": place.title,
         'imgs': get_images(place),
         "description_short": place.description_short,
-        "description_long": place.tmc,
-        # "description_long": place.description_long,
+        "description_long": place.description_long,
         "coordinates": {
             "lat": place.lat,
             "lng": place.lng,
