@@ -12,20 +12,27 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path, PurePath
 
+from environs import Env
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+env = Env()
+env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m9kv5gh3@$ilpv+_89&5fy3nzolm14nd^4&h#)%)wj#r0pa+h9'
+SECRET_KEY = env.str('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,8 +85,8 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env.str('DATABASE_ENGINE'),
+        'NAME': BASE_DIR / env.str('DATABASE_NAME'),
     }
 }
 
@@ -121,17 +128,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = ('static',)
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = PurePath.joinpath(BASE_DIR, 'media')
 MEDIAFILES_DIRS = ('media',)
-
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', False)
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', False)
+SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', False)
