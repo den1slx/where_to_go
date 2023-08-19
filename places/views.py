@@ -64,25 +64,20 @@ def get_images(place):
 
 
 def get_place_info(place):
-    path = place.path
-    if path:
-        with open(path, 'r', encoding='utf-8') as file:  # from file
-            place_info = file.read()
-        return place_info
-    else:
 
-        place_info = {
-            "title": place.title,
-            'imgs': get_images(place),
-            "description_short": place.description_short,
-            "description_long": place.description_long,
-            "coordinates": {
-                "lat": place.lat,
-                "lng": place.lng,
-            }
+    place_info = {
+        "title": place.title,
+        'imgs': get_images(place),
+        "description_short": place.description_short,
+        "description_long": place.tmc,
+        # "description_long": place.description_long,
+        "coordinates": {
+            "lat": place.lat,
+            "lng": place.lng,
         }
-        place_info = json.dumps(place_info, ensure_ascii=False, indent=4)
-        return place_info
+    }
+    place_info = json.dumps(place_info, ensure_ascii=False, indent=4)
+    return place_info
 
 
 
