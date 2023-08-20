@@ -17,7 +17,7 @@ class Place(models.Model):
 
 class PlaceImage(models.Model):
     image = models.ImageField(upload_to='images/')
-    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL, related_name='images')
+    place = models.ForeignKey(Place, null=True, on_delete=models.CASCADE, related_name='images')
     my_order = models.PositiveIntegerField(
         default=0,
         blank=False,
