@@ -129,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = PurePath.joinpath(BASE_DIR, 'static')
-STATICFILES_DIRS = ('assets',)
+# STATICFILES_DIRS = ('assets',)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = PurePath.joinpath(BASE_DIR, 'media')
