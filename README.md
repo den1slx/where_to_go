@@ -29,6 +29,20 @@ python manage.py createsuperuser
 ```commandline
 python manage.py runserver
 ```
+* Загрузка из `json` файла
+  * Для загрузки из локального файла
+  ```commandline
+  python manage.py load_place 'pathtolockalfile'
+  ```
+  * Для `url`
+  ```commandline
+  python manage.py load_place 'url' -u
+  ```
+  тестовый url: https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/%D0%90%D0%BD%D1%82%D0%B8%D0%BA%D0%B0%D1%84%D0%B5%20Bizone.json
+  * Для информации
+  ```commandline
+    python manage.py load_place -h
+  ```
 * Сайт будет находиться [здесь](http://127.0.0.1:8000/)
 * Админка будет находиться [здесь](http://127.0.0.1:8000/admin)
 
