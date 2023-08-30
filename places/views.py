@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse
 
 from places.models import Place, PlaceImage
 
@@ -10,13 +11,13 @@ import json
 
 
 def index(request):
-    data = {
+    context = {
         'places': get_geo_places(),
     }
-    return render(request, 'index.html', context=data)
+    return render(request, 'index.html', context=context)
 
 
-def place(request, place_id):
+def get_places(request, place_id):
     try:
         place = Place.objects.get(id=place_id)
     except ObjectDoesNotExist:
@@ -38,13 +39,7 @@ def get_geo_places():
             'properties': {
                 'title': place.title,
                 'placeId': f'{place.id}',
-                'detailsUrl': f'./place/{place.id}',
-                # 'detailsUrl': {
-                #     'title': place.title,
-                #     'imgs': get_images(place),
-                #     'description_short': place.description_short,
-                #     'description_long': place.description_long,
-                # },
+                'detailsUrl': reverse('place', args=(place.id,))
             }
         }
 
@@ -65,7 +60,7 @@ def get_images(place):
 
 def get_place_info(place):
 
-    place_info = {
+    place_json = {
         "title": place.title,
         'imgs': get_images(place),
         "description_short": place.description_short,
@@ -75,8 +70,8 @@ def get_place_info(place):
             "lng": place.lng,
         }
     }
-    place_info = json.dumps(place_info, ensure_ascii=False, indent=4)
-    return place_info
+    place_json = json.dumps(place_json, ensure_ascii=False, indent=4)
+    return place_json
 
 
 
