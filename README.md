@@ -49,16 +49,26 @@ python manage.py runserver
 #### структура DB
 * Place
     * title - char 200
-    * description_short - char 350
+    * description_short - TextField
     * lng - float
     * lat - float
     * description_long - HTMLField
 * PlaceImage
     * image - image
     * place - FK Place
-    * my_order - for ordering
+    * ordering - for ordering
 
+#### Окружение
 
+* SECRET_KEY=yoursecretkey
+* DEBUG=False (default=True)
+* DATABASE_ENGINE=django.db.backends.sqlite3
+* DATABASE_NAME=db.sqlite3
+* SESSION_COOKIE_SECURE=True (default=False)
+* CSRF_COOKIE_SECURE=True (default=False)
+* SECURE_SSL_REDIRECT=True (default=False)
+* ALLOWED_HOSTS=yourhost1,yourhost2,etc  
+* STATIC_ROOT=assets (default=static)
 
 ### Цель проекта
 Код написан в образовательных целях на онлайн-курсе для веб-разработчиков [dvmn.org](https://dvmn.org/).
