@@ -32,7 +32,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -128,8 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = PurePath.joinpath(BASE_DIR, 'static')
-# STATICFILES_DIRS = ('assets',)
+STATIC_ROOT = PurePath.joinpath(BASE_DIR, env('STATIC_ROOT', 'static'))
+STATICFILES_DIRS = ('staticfiles',)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = PurePath.joinpath(BASE_DIR, 'media')
@@ -141,7 +141,7 @@ MEDIAFILES_DIRS = ('media',)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if not DEBUG:
-    SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', True)
-    CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', True)
-    SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', True)
+
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', False)
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', False)
+SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', False)
