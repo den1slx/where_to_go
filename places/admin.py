@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from adminsortable2.admin import SortableAdminMixin, SortableAdminBase, SortableStackedInline
 
 from places.models import Place, PlaceImage
@@ -8,7 +8,6 @@ from places.models import Place, PlaceImage
 class InlineImage(SortableStackedInline):
     model = PlaceImage
     extra = 1
-    readonly_fields = ['image_preview', 'original_size', 'preview_size']
 
     def original_size(self, obj):
         width = obj.image.width
@@ -16,43 +15,27 @@ class InlineImage(SortableStackedInline):
         return f'''width: {width}
          height:{height}'''
 
-    def preview_size(self, obj):
-        cap = 200
-        width = obj.image.width
-        height = obj.image.height
-        if width > height:
-            height = (height/ width) * cap
-            width = cap
-
-        elif width < height:
-            width = (width / height) * cap
-            height = cap
-        else:
-            width = 200
-            height = 200
-
-        return f'''width: {width}
-         height:{height}'''
-
     def image_preview(self, obj):
-        cap = 200
-        width = obj.image.width
-        height = obj.image.height
-        if width > height:
-            height = (height/ width) * cap
-            width = cap
-
-        elif width < height:
-            width = (width / height) * cap
-            height = cap
+        if obj.image.width > obj.image.height:
+            width = 200
+            height = 'auto'
+        elif obj.image.height > obj.image.width:
+            width = 'auto'
+            height = 200
         else:
             width = 200
             height = 200
-        return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(
+        return format_html('<img src="{url}" width="{width}" height="{height}" />'.format(
             url=obj.image.url,
             width=width,
             height=height,
         ))
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ['image_preview', 'original_size', ]
+        else:
+            return []
 
 
 @admin.register(Place)
