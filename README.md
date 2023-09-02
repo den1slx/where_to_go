@@ -8,7 +8,7 @@
 
 
 ### Установка
-- python3 должен быть установлен.
+- python3 должен быть установлен. (3.10.11)
 - Скачайте код.
 - Установите зависимости командой:
 ```commandline
@@ -60,15 +60,15 @@ python manage.py runserver
 
 #### Окружение
 
-* SECRET_KEY=yoursecretkey
-* DEBUG=False (default=True)
-* DATABASE_ENGINE=django.db.backends.sqlite3
-* DATABASE_NAME=db.sqlite3
-* SESSION_COOKIE_SECURE=True (default=False)
-* CSRF_COOKIE_SECURE=True (default=False)
-* SECURE_SSL_REDIRECT=True (default=False)
-* ALLOWED_HOSTS=yourhost1,yourhost2,etc  
-* STATIC_ROOT=assets (default=static)
+* SECRET_KEY=yoursecretkey  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#secret-key)
+* DEBUG=False (default=True)  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#debug)
+* DATABASE_ENGINE=your db engine (default='django.db.backends.sqlite3') [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#engine)
+* DATABASE_NAME=your db (default='db.sqlite3')  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#name)
+* SESSION_COOKIE_SECURE=True (default=False)  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#session-cookie-secure)
+* CSRF_COOKIE_SECURE=True (default=False)  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-secure)
+* SECURE_SSL_REDIRECT=True (default=False)  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#secure-ssl-redirect)
+* ALLOWED_HOSTS=yourhost1,yourhost2,etc  (default=['127.0.0.1', '.localhost'])  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#allowed-hosts)
+* STATIC_ROOT=assets (default=static)  [docs](https://docs.djangoproject.com/en/4.2/ref/settings/#static-root)
 
 ### Цель проекта
 Код написан в образовательных целях на онлайн-курсе для веб-разработчиков [dvmn.org](https://dvmn.org/).
