@@ -26,7 +26,7 @@ class PlaceImage(models.Model):
     )
 
     def __str__(self):
-        return f'{self.place.title} image{self.place.id}{self.id}'
+        return f'{self.place.title} image{self.place.id}-{self.id}'
 
     class Meta:
         ordering = ['ordering',]
