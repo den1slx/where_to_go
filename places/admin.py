@@ -1,6 +1,7 @@
+from adminsortable2.admin import SortableAdminMixin, SortableAdminBase, SortableStackedInline
+
 from django.contrib import admin
 from django.utils.html import format_html
-from adminsortable2.admin import SortableAdminMixin, SortableAdminBase, SortableStackedInline
 
 from places.models import Place, PlaceImage
 
@@ -16,20 +17,10 @@ class InlineImage(SortableStackedInline):
          height:{height}'''
 
     def image_preview(self, obj):
-        if obj.image.width > obj.image.height:
-            width = 200
-            height = 'auto'
-        elif obj.image.height > obj.image.width:
-            width = 'auto'
-            height = 200
-        else:
-            width = 200
-            height = 200
-        return format_html('<img src="{url}" width="{width}" height="{height}" />'.format(
-            url=obj.image.url,
-            width=width,
-            height=height,
-        ))
+        return format_html(
+            '<img src="{}" style="max-width:200px; max-height:200px;"/>',
+            obj.image.url,
+        )
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
@@ -56,3 +47,19 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
             }
         ),
     ]
+
+
+@admin.register(PlaceImage)
+class ImageeAdmin(SortableAdminMixin, admin.ModelAdmin):
+    search_fields = ['id', ]
+    search_help_text = 'Поиск по id картинки'
+    list_filter = ['place__title',]
+    readonly_fields = ['image_preview',]
+    list_display = ['image_preview', 'id', 'ordering',]
+    ordering = ['ordering',]
+
+    def image_preview(self, obj):
+        return format_html(
+            '<img src="{}" style="max-width:200px; max-height:200px;"/>',
+            obj.image.url,
+        )
