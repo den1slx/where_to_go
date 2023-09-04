@@ -15,10 +15,9 @@ def index(request):
 
 
 def get_place(request, place_id):
-    place = get_object_or_404(Place, id=place_id)
 
-    place_images = place.images.all()
-    imgs = [place.image.url for place in place_images]
+    place = get_object_or_404(Place, id=place_id)
+    imgs = [place.image.url for place in place.images.all()]
 
     place_json = {
         "title": place.title,
