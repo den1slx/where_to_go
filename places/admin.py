@@ -50,12 +50,12 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 
 
 @admin.register(PlaceImage)
-class ImageeAdmin(SortableAdminMixin, admin.ModelAdmin):
-    search_fields = ['id', ]
-    search_help_text = 'Поиск по id картинки'
-    list_filter = ['place__title',]
-    readonly_fields = ['image_preview',]
-    list_display = ['image_preview', 'id', 'ordering',]
+class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    search_fields = ['place__id', ]
+    search_help_text = 'Поиск по id места'
+    raw_id_fields = ['place',]
+    readonly_fields = ('image_preview',)
+    list_display = ['image_preview', 'id', 'place_id', 'ordering',]
     ordering = ['ordering',]
 
     def image_preview(self, obj):
