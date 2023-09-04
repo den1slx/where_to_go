@@ -15,9 +15,8 @@ def index(request):
 
 
 def get_place(request, place_id):
-
-    place = get_object_or_404(Place, id=place_id)
-    imgs = [place.image.url for place in place.images.select_related('place').all()]
+    place = get_object_or_404(Place.objects.prefetch_related('images').all(), id=place_id)
+    imgs = [place.image.url for place in place.images.all()]
 
     place_json = {
         "title": place.title,
